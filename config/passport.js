@@ -60,7 +60,7 @@ passport.use(new GitHubStrategy({
   // Copy and paste from passport-github2 github repo. Then go on github and configure clientID and clientSecret by registering an app https://github.com/settings/applications/new
     clientID: '2e5f40e551b5ed1a1637',
     clientSecret: '656d1285badbd994a0d7c0b0efef03b0c049c7e3',
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: "/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     knex("users")
