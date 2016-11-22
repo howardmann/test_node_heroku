@@ -9,13 +9,13 @@ module.exports = {
       database: "myfirstpostgres"
     }
   }
-  // ,
-  // production: {
-  //   client: "pg",
-  //   connection: {
-  //     host: process.env.DATABASE_URL,
-  //     user: "production",
-  //     database: "myfirstpostgres"
-  //   }
-  // }
+  ,
+  production: {
+    client: "pg",
+    connection: {
+      host: process.env.DATABASE_URL,
+      user: "production",
+      database: "myfirstpostgres"
+    }
+  }
 }
