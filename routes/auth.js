@@ -13,6 +13,7 @@ router
   .post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/',
     failureRedirect: '/signup',
+    successFlash: true,
     failureFlash: true
   }))
   .get('/login', function(req, res, next) {
@@ -23,6 +24,7 @@ router
   .post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/login',
+    successFlash: true,
     failureFlash: true
   }))
   .get('/logout', function(req, res, next) {

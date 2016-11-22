@@ -43,8 +43,10 @@ passport.use('local-signup', new LocalStrategy({
           name: req.body.name
         };
 
-        knex("users")
-          .insert(newUser)
+        // We use this strange syntax because of issues with knex and postgres. We must specify what we want returned after we insert a new object into the users database. Here we want back the id which is returned as an array. We then assign our newUser variable to the newly created id and assign it to our passport.done session (PAINFUL i know)
+        knex.insert(newUser)
+          .returning('id')
+          .into('users')
           .then(ids => {
             newUser.id = ids[0];
             return done(null, newUser, req.flash('message', 'Succesfully created'));
@@ -66,19 +68,21 @@ passport.use(new GitHubStrategy({
       .where("oauth_id", profile.username)
       .first()
       .then((user) => {
+
         if (user) {
           return done(null, user)
         }
 
         var newUser = {
           oauth_provider: "github",
-          oauth_id: profile.username,
+          oauth_id: profile.username
         };
 
-        return knex("users")
-          .insert(newUser)
+        return knex.insert(newUser)
+          .returning('id')
+          .into('users')
           .then((ids) => {
-            newUser.id = ids[0]
+            newUser.id = ids[0];
             done(null, newUser)
           })
       })

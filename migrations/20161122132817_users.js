@@ -1,17 +1,15 @@
 
 exports.up = function(knex, Promise) {
-  return knex.raw(`
-    CREATE TABLE users (
-      id int(11) unsigned NOT NULL AUTO_INCREMENT,
-      email varchar(50) DEFAULT NULL,
-      password varchar(100) DEFAULT NULL,
-      name varchar(50) DEFAULT NULL,
-      is_admin tinyint(1) DEFAULT '0',
-      oauth_provider varchar(50) DEFAULT NULL,
-      oauth_id varchar(50) DEFAULT NULL,
-      PRIMARY KEY (id)
-    ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-  `);
+  return knex.schema.createTable('users', function(table){
+    table.increments();
+    table.string('email');
+    table.string('password');
+    table.string('name');
+    table.string('oauth_provider');
+    table.string('oauth_id');
+    table.boolean('is_admin').defaultTo(false);
+    table.timestamps();
+  });
 };
 
 exports.down = function(knex, Promise) {
