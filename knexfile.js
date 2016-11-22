@@ -12,10 +12,6 @@ module.exports = {
   ,
   production: {
     client: "pg",
-    connection: {
-      host: process.env.DATABASE_URL,
-      user: "production",
-      database: "myfirstpostgres"
-    }
+    connection: process.env.DATABASE_URL
   }
 }
