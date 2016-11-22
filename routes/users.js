@@ -17,7 +17,7 @@ var loginRequired = function(req, res, next) {
 
 
 /* GET users listing. */
-router.get('/', loginRequired, function(req, res, next) {
+router.get('/', function(req, res, next) {
   knex("users")
     .then(data => {
       res.send(data);
