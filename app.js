@@ -7,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // Require npm packages for authentication
 var session = require("express-session");
-var RedisStore = require('connect-redis')(session)
+var RedisStore = require('connect-redis')(session);
+var redis = require('heroku-redis-client');
 var passport = require('passport');
 var flash    = require('connect-flash');
 
@@ -35,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ======PASSPORT AND SESSIONS MIDDLEWARE========
-app.use(session({store: new RedisStore(), secret: "i love dogs", resave: false, saveUnitialized: false}));
+app.use(session({store: new RedisStore({client: redis.createClient()}), secret: "i love dogs", resave: false, saveUnitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
