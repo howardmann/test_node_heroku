@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <h1>Our first express app</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/users">Users</a>
+        <br>
+        {{#if user}}
+          <a href="/logout">Logout</a>
+        {{else}}
+          <a href="/login">Login</a>
+          <a href="/signup">Signup</a>
+        {{/if}}
+      </nav>
+    </header>
+
+    {{{body}}}
+
+    <footer>
+      <small>A Howie_Burger tutorial</small>
+    </footer>
+  </body>
+</html>
